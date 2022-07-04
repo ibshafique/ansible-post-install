@@ -1,0 +1,9 @@
+---
+# tasks file for ./Roles/clamAV-crontab/
+- name: crontab for ClamAV
+  ansible.builtin.cron:
+    name: "clamAV"
+    minute: "0"
+    hour: "20"
+    user: "{{ username }}"
+    job: '{echo -e "\n\n"; date; /usr/bin/clamscan -ir /; } >> /var/log/clamav/manual_scan_report.log 2>&1'

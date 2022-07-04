@@ -1,0 +1,11 @@
+---
+all:
+  children:
+    user_hosts:
+      hosts:
+        192.168.X.X:
+            ansible_user: user1
+            username: user1
+        192.168.X.Y:
+            ansible_user: user2
+            username: user2

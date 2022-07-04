@@ -1,0 +1,23 @@
+---
+# tasks file for ./Roles/create-user/
+- name: create a login user
+  user:
+    name: "{{ username }}"
+    password: "{{ password | password_hash('sha512') }}"
+    shell: /bin/bash
+    groups:
+      - root
+      - sudo
+    state: present
+
+- name: add {{ username }} to sudoers file
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    regexp: '^{{ username }}'
+    line: '{{ username }} ALL=(ALL) ALL'
+    validate: 'visudo -cf %s'
+
+- name: ensure a locale exists
+  community.general.locale_gen:
+    name: en_US.UTF-8
+    state: present

@@ -1,0 +1,5 @@
+---
+# vars file for ./roles/chrony-ntp/
+private_ntp1: 192.168.51.54
+private_ntp2: 192.168.52.54
+public_ntp: time.google.com

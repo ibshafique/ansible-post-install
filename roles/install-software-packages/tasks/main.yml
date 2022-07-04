@@ -1,0 +1,15 @@
+---
+# tasks file for ./Roles/install-software-packages/
+- name: install other software packages
+  apt:
+    state: latest
+    name:
+    - chrony 
+    - openjdk-8-jdk
+    - clamav
+    - clamav-daemon
+    - gdebi-core
+    - openssh-client
+    - vim
+    - net-tools
+    update_cache: yes

@@ -1,0 +1,52 @@
+---
+# tasks file for ./Roles/google-chrome/
+
+- name: create directory for the enrollment-token
+  file:
+    path: /etc/opt/chrome/policies/enrollment/
+    state: directory
+    mode: "u=rwx,g=rx,o=rx"
+
+- name: creating cloud-management-enrollment-token
+  copy:
+    src: ./roles/files/CloudManagementEnrollmentToken
+    dest: /etc/opt/chrome/policies/enrollment/CloudManagementEnrollmentToken
+    decrypt: true
+    owner: "{{ username }}" 
+    group: "{{ username }}" 
+    mode: 0744
+    backup: no
+
+- name: adding apt signing key for enrollment-token
+  ansible.builtin.apt_key:
+    url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+    state: present
+
+- name: adding repository into sources list for enrollment-token
+  ansible.builtin.apt_repository:
+    repo: deb https://packages.cloud.google.com/apt endpoint-verification main
+    state: present
+    filename: endpoint-verification
+
+- name: installing endpoint-verification for enrollment-token
+  ansible.builtin.apt:
+    name: "endpoint-verification"
+    state: latest
+    update_cache: true
+
+- name: adding apt signing key for google-chrome
+  ansible.builtin.apt_key:
+    url: "https://dl.google.com/linux/linux_signing_key.pub"
+    state: present
+
+- name: adding repository into sources list for google-chrome
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+    state: present
+    filename: google-chrome
+
+- name: installing google-chrome-stable
+  ansible.builtin.apt:
+    name: "google-chrome-stable"
+    state: latest
+    update_cache: true

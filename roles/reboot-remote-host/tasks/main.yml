@@ -1,0 +1,5 @@
+---
+# tasks file for ./roles/reboot-remote-host
+- name: Reboot the machine (Wait for 60sec)
+  reboot:
+    reboot_timeout: 60

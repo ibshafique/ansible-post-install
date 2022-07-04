@@ -1,0 +1,24 @@
+---
+# tasks file for ./Roles/install-deb-packages/
+- name: copying the required .deb files
+  copy:
+    src: ./roles/files/{{ item }}
+    dest: '/tmp/'
+    force: no
+  with_items:
+    - rmmagent_2.0.4_amd64.deb
+    - spark_2_9_4.deb
+    - clamtk_6.02-1_all.deb
+    - forticlient_vpn_7.0.0.0018_amd64.deb
+
+- name: installing rmmAgent
+  command: gdebi /tmp/rmmagent_2.0.4_amd64.deb -n
+
+- name: installing spark client 
+  command: gdebi /tmp/spark_2_9_4.deb -n
+
+- name: installing clamtk 
+  command: gdebi /tmp/clamtk_6.02-1_all.deb -n
+
+- name: installing forticlient 
+  command: gdebi /tmp/forticlient_vpn_7.0.0.0018_amd64.deb -n

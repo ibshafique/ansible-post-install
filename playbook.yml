@@ -1,0 +1,17 @@
+### RUN THE PLAYBOOK WITH ###
+# ansible-playbook -v playbook.yml --extra-vars "@password_secret.yml"
+---
+- name: Post Installation Tasks for Linux Machine
+  hosts: user_hosts
+  serial: 3
+  become: true
+
+  roles:
+  # - create-user
+    - google-chrome
+    - install-software-packages
+    - chrony-ntp
+    - install-deb-packages
+    - clamAV-crontab
+    - update-upgrade-apt
+    - reboot-remote-host

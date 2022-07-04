@@ -1,0 +1,19 @@
+---
+# tasks file for ./Roles/chrony-ntp/
+- name: deploy chrony.conf template
+  template:
+    src: ./roles/files/chrony.conf
+    dest: /etc/chrony/chrony.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+
+- name: restart and enable chronyd
+  service:
+    name: chronyd
+    state: restarted
+    enabled: yes
+
+- name: sync hwclock with systemtime
+  shell: hwclock -w
