@@ -1,0 +1,6 @@
+roles/files/chrony.conf filter=lfs diff=lfs merge=lfs -text
+roles/files/clamtk_6.02-1_all.deb filter=lfs diff=lfs merge=lfs -text
+roles/files/CloudManagementEnrollmentToken filter=lfs diff=lfs merge=lfs -text
+roles/files/forticlient_vpn_7.0.0.0018_amd64.deb filter=lfs diff=lfs merge=lfs -text
+roles/files/rmmagent_2.0.4_amd64.deb filter=lfs diff=lfs merge=lfs -text
+roles/files/spark_2_9_4.deb filter=lfs diff=lfs merge=lfs -text
